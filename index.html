@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <!-- add boolean defer attribute so JS script runs after HTML is fully parsed -->
   </head>
   <body>
-    <button id="rock">rock</button>
-    <button id="paper">paper</button>
-    <button id="scissors">scissors</button>
+    <div id="choices">
+      <button id="rockButton">rock</button>
+      <button id="paperButton">paper</button>
+      <button id="scissorsButton">scissors</button>
+    </div>
   </body>
 </html>
