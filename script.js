@@ -1,3 +1,12 @@
+const playerDisplay = document.getElementById("playerDisplay");
+const computerDisplay = document.getElementById("computerDisplay");
+const resultDisplay = document.getElementById("resultDisplay");
+const playerScoreDisplay = document.getElementById("playerScoreDisplay");
+const computerScoreDisplay = document.getElementById("computerScoreDisplay");
+
+let playerScore = 0;
+let computerScore = 0;
+
 document.getElementById("rockButton").addEventListener("click", function () {
   playGame("rock"); // pass choice to playGame function so it
 });
@@ -72,7 +81,26 @@ function playRound(humanChoice, computerChoice) {
         break;
     }
   }
-  console.log(result);
+
+  // console.log(result);
+  playerDisplay.textContent = `PLAYER: ${humanChoice}`;
+  computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
+  resultDisplay.textContent = result;
+
+  switch (result) {
+    case "You win!":
+      playerScore++;
+      playerScoreDisplay.textContent = `Player score: ${playerScore}`;
+      break;
+    case "Computer wins!":
+      computerScore++;
+      computerScoreDisplay.textContent = `Computer score: ${computerScore}`;
+      break;
+  }
+
+  if (playerScore || computerScore == 5) {
+    alert("game over!");
+  }
 }
 
 function playGame(humanChoice) {
