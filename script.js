@@ -4,11 +4,14 @@ const resultDisplay = document.getElementById("resultDisplay");
 const playerScoreDisplay = document.getElementById("playerScoreDisplay");
 const computerScoreDisplay = document.getElementById("computerScoreDisplay");
 
+// set initial values for game
 let playerScore = 0;
 let computerScore = 0;
+let isGameOver = false;
+let scoreToReach = 5;
 
 document.getElementById("rockButton").addEventListener("click", function () {
-  playGame("rock"); // pass choice to playGame function so it
+  playGame("rock"); // pass choice to playGame function
 });
 document.getElementById("paperButton").addEventListener("click", function () {
   playGame("paper");
@@ -97,17 +100,29 @@ function playRound(humanChoice, computerChoice) {
       computerScoreDisplay.textContent = `Computer score: ${computerScore}`;
       break;
   }
+}
 
-  if (playerScore || computerScore == 5) {
-    alert("game over!");
+// winner and loser declared when player or computer score equals score to reach
+function endGame() {
+  if (playerScore === scoreToReach || computerScore === scoreToReach) {
+    isGameOver = true;
+    if (playerScore === scoreToReach) {
+      resultDisplay.textContent = "You won the game! Yay!";
+    } else if (computerScore === scoreToReach) {
+      resultDisplay.textContent = "You lose the game. Better luck next time.";
+    }
   }
 }
 
 function playGame(humanChoice) {
-  // function responsible for setting up a game round, including getting
-  // the computer choice, then calls playRound with both choices
-  const computerChoice = getComputerChoice();
-  playRound(humanChoice, computerChoice);
+  // check if game is over first
+  if (!isGameOver) {
+    // function responsible for setting up a game round, including getting
+    // the computer choice, then calls playRound with both choices
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    endGame(); // call endGame function if the scores permit
+  }
 }
 
 // playGame();
